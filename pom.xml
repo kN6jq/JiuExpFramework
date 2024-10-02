@@ -1,0 +1,120 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.jiu</groupId>
+  <artifactId>JiuExpFramework</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>JiuExpFramework</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <compiler.version>1.8</compiler.version>
+    <java.version>1.8</java.version>
+    <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <custom.lib-path>${project.basedir}/lib</custom.lib-path>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>central</id>
+      <url>https://repo1.maven.org/maven2</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.intellij</groupId>
+      <artifactId>forms_rt</artifactId>
+      <version>7.0.3</version>
+    </dependency>
+    <dependency>
+      <groupId>com.formdev</groupId>
+      <artifactId>flatlaf</artifactId>
+      <version>3.2.5</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.formdev/flatlaf-extras -->
+    <dependency>
+      <groupId>com.formdev</groupId>
+      <artifactId>flatlaf-extras</artifactId>
+      <version>3.2.5</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/me.gv7.woodpecker/woodpecker-requests -->
+    <dependency>
+      <groupId>me.gv7.woodpecker</groupId>
+      <artifactId>woodpecker-requests</artifactId>
+      <version>0.2.1</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-core -->
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-core</artifactId>
+      <version>5.8.29</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-json -->
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-json</artifactId>
+      <version>5.8.29</version>
+    </dependency>
+    <dependency>
+      <groupId>ysoserial-woodpecker</groupId>
+      <artifactId>ysoserial-woodpecker</artifactId>
+      <version>0.5.3</version>
+<!--      <scope>system</scope>-->
+<!--      <systemPath>${custom.lib-path}/ysoserial-for-woodpecker-0.5.3-all.jar</systemPath>-->
+    </dependency>
+  </dependencies>
+  <build>
+    <!-- 指定最后构建打包成功的压缩包的名字 -->
+    <finalName>JiuExpFramework</finalName>
+    <plugins>
+      <!-- 1.maven 打包时跳过测试 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId> <!-- 测试使用到的插件 -->
+        <configuration>
+          <skip>true</skip><!-- 声明跳过测试 -->
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>org.jiu.JiuExpFramework</mainClass>
+            </manifest>
+            <manifestEntries>
+              <Class-Path>.</Class-Path>
+            </manifestEntries>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
